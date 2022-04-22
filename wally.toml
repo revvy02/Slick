@@ -1,0 +1,13 @@
+[package]
+name = "revvy02/slick"
+description = "Luau library for state managment and signaling"
+version = "0.0.2"
+license = "MIT"
+authors = ["revvy"]
+realm = "shared"
+registry = "https://github.com/upliftgames/wally-index"
+
+[dependencies]
+Cleaner = "revvy02/cleaner@0.0.5"
+TestEZ = "roblox/testez@0.4.1"
+Promise = "evaera/promise@4.0.0"

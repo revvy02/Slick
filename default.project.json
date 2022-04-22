@@ -1,0 +1,6 @@
+{
+	"name": "Cleaner",
+	"tree": {
+		"$path": "src"
+	}
+}
