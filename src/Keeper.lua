@@ -63,7 +63,6 @@ function Keeper:addCard(key, value)
     local card = self._cleaner:set(key, Card.new(value))
     card.key = key
 
-    print("aaaa", card)
     self.added:fire(key, card)
 
     self._cleaner:set(card, card:getChangedSignal():connect(function(newValue, oldValue)

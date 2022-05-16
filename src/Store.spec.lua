@@ -170,7 +170,7 @@ return function()
             store:destroy()
         end)
 
-        it("should fire the changed signal property with the changed key, new state, and old state", function()
+        it("should fire the public changed signal", function()
             local store = Store.new({a = 1})
             local key, new, old
 
@@ -188,7 +188,25 @@ return function()
             store:destroy()
         end)
 
-        it("should fire the changed signal for the key with the new and old value", function()
+        it("should fire the public reduced signal", function()
+            local store = Store.new({a = 1})
+            local key, reducer, value
+
+            store.reduced:connect(function(...)
+                key, reducer, value = ...
+            end)
+
+            store:dispatch("a", "setValue", 2)
+
+            expect(store:get("a")).to.equal(2)
+            expect(key).to.equal("a")
+            expect(reducer).to.equal("setValue")
+            expect(value).to.equal(2)
+
+            store:destroy()
+        end)
+
+        it("should fire the appropriate key changed signal", function()
             local store = Store.new({a = 1})
             local new, old
 
@@ -203,7 +221,7 @@ return function()
             store:destroy()
         end)
 
-        it("should fire the appropriate reduced signal", function()
+        it("should fire the appropriate key reduced signal", function()
             local store = Store.new({a = {}})
             local index, value
 

@@ -51,7 +51,7 @@ return function()
 
             expect(signal.is(empty)).to.equal(false)
             expect(signal.is(true)).to.equal(false)
-            expect(signal.is(empty)).to.equal(false)
+            expect(signal.is(false)).to.equal(false)
             expect(signal.is("string")).to.equal(false)
 
             signal:destroy()
@@ -109,24 +109,26 @@ return function()
     end)
     
     describe("Signal:fire", function()
-        it("should queue passed args and fire the first connection with them if queueing", function()
+        it("should queue passed args and fire the first connection made with all of them if queueing enabled", function()
             local signal = Signal.new()
             signal:enableQueueing()
 
-            local done = false
+            local count = 0
 
-            signal:fire(true)
+            signal:fire(1)
+            signal:fire(2)
+            signal:fire(10)
 
             signal:connect(function(value)
-                done = value
+                count += value
             end)
 
-            expect(done).to.equal(true)
+            expect(count).to.equal(13)
 
             signal:destroy()
         end)
 
-        it("should not fire the first connection with queued args if the args are flushed first", function()
+        it("should not fire the first connection with queued args if the args are flushed first if queueing enabled", function()
             local signal = Signal.new()
             signal:enableQueueing()
 
@@ -147,7 +149,7 @@ return function()
             signal:destroy()
         end)
 
-        it("should not queue passed args and fire the first connection with them if not queueing", function()
+        it("should not queue passed args and fire the first connection with them if queueing disabled", function()
             local signal = Signal.new()
             local done = false
 
@@ -350,6 +352,25 @@ return function()
 
             signal:destroy()
         end)
+
+        it("if args are queued, it should return with args popped from the queue if args are queued", function()
+            local signal = Signal.new()
+            signal:enableQueueing()
+
+            signal:fire(0)
+            signal:fire(1)
+            signal:fire(2)
+
+            local popped0 = signal:wait()
+            local popped1 = signal:wait()
+            local popped2 = signal:wait()
+
+            expect(popped0).to.equal(0)
+            expect(popped1).to.equal(1)
+            expect(popped2).to.equal(2)
+
+            signal:destroy()
+        end)
     end)
     
     describe("Signal:promise", function()
@@ -362,7 +383,7 @@ return function()
             signal:destroy()
         end)
 
-        it("should return a promise that resolves with the outcome of :wait", function()
+        it("should return a promise that resolves with the args passed in the next fire call", function()
             local signal = Signal.new()
             local result = false
 
@@ -373,6 +394,28 @@ return function()
             expect(result).to.equal(false)
             signal:fire(true)
             expect(result).to.equal(true)
+
+            signal:destroy()
+        end)
+
+        it("should return a promise that resolves with args popped from the queue if args are queued", function()
+            local signal = Signal.new()
+            signal:enableQueueing()
+
+            local result = 2
+
+            signal:fire(0)
+            signal:fire(1)
+            
+            expect(select(2, signal:promise():await())).to.equal(0)
+            expect(select(2, signal:promise():await())).to.equal(1)
+
+            signal:promise():andThen(function(value)
+                result = value
+            end)
+
+            signal:fire(2)
+            expect(result).to.equal(2)
 
             signal:destroy()
         end)
@@ -418,34 +461,57 @@ return function()
 
             signal:destroy()
         end)
-    end)
 
-    describe("Signal:once", function()
-        it("should return a connection that will disconnect after being fired once", function()
+        it("should throw within connection handler if connection is disconnected from inside handler if args are queued", function()
             local signal = Signal.new()
+            signal:enableQueueing()
 
-            local connection = signal:once(noop)
+            local count = 0
+            local connection
 
-            signal:fire()
-            expect(connection.connected).to.equal(false)
+            signal:fire(1)
+            signal:fire(2)
+            signal:fire(10)
+
+            connection = signal:connect(function()
+                expect(function()
+                    connection:disconnect()
+                end).to.throw()
+            end)
 
             signal:destroy()
         end)
 
-        it("should not call the handler if fired more than once", function()
+        it("should not throw if connection is disconnected from inside handler if args not queued", function()
             local signal = Signal.new()
-            local value = 0
+            local connection
 
-            local connection = signal:once(function(inc)
-                value += inc
+            expect(function()
+                connection = signal:connect(function()
+                    connection:disconnect()
+                end)
+            end).to.never.throw()
+
+            signal:destroy()
+        end)
+
+        it("should fire the connection with all queued args in FIFO order if args are queued", function()
+            local signal = Signal.new()
+            signal:enableQueueing()
+
+            local output = {}
+
+            signal:fire(1)
+            signal:fire(2)
+            signal:fire(10)
+
+            signal:connect(function(value)
+                table.insert(output, value)
             end)
 
-            signal:fire(2)
-            expect(value).to.equal(2)
-            expect(connection.connected).to.equal(false)
-            
-            signal:fire(1)
-            expect(value).to.equal(2)
+            expect(output[1]).to.equal(1)
+            expect(output[2]).to.equal(2)
+            expect(output[3]).to.equal(10)
 
             signal:destroy()
         end)

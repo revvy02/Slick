@@ -126,7 +126,8 @@ function Store.new(initial)
     self._changedSignals = setmetatable({}, WEAK_MT)
 
     self.changed = self._cleaner:add(Signal.new())
-
+    self.reduced = self._cleaner:add(Signal.new())
+    
     return self
 end
 
@@ -242,7 +243,9 @@ function Store:dispatch(key, reducer, ...)
     
     self._state = newState
     self:_tryHistory(oldState)
+
     self.changed:fire(key, newState, oldState)
+    self.reduced:fire(key, reducer, ...)
 
     -- handle direct key change and reduced signals
     local changedSignal = self:_findChangedSignal(key, false)

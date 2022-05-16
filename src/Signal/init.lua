@@ -28,20 +28,31 @@ local function eachNode(node, fn, ...)
     end
 end
 
-local function fireDeferred(node, ...)
-    task.defer(node._fn, ...)
+local function fireDeferred(fn, ...)
+    task.defer(fn, ...)
 end
 
-local function fireImmediate(node, ...)
+local function fireDeferredConnection(node, ...)
+    fireDeferred(node._fn, ...)
+end
+
+local function fireImmediate(fn, ...)
     if not freeRunnerThread then
         freeRunnerThread = coroutine.create(runEventHandlerInFreeThread)
     end
-    
-    task.spawn(freeRunnerThread, node._fn, ...)
+
+    task.spawn(freeRunnerThread, fn, ...)
 end
 
+local function fireImmediateConnection(node, ...)
+    fireImmediate(node._fn, ...)
+end
+
+
+
+
 --[=[
-    Signal implementation in Luau based off of Stravant's GoodSignal.
+    Luau signal implementation
 
     @class Signal
 ]=]
@@ -133,7 +144,7 @@ end
     @return boolean
 ]=]
 function Signal.is(obj)
-    return type(obj) == "table" and getmetatable(obj) == Signal or false
+    return type(obj) == "table" and getmetatable(obj) == Signal
 end
 
 --[=[
@@ -218,7 +229,7 @@ function Signal:fire(...)
     else
         self.firing = true
 
-        eachNode(head, self.deferred and fireDeferred or fireImmediate, ...)
+        eachNode(head, self.deferred and fireDeferredConnection or fireImmediateConnection, ...)
 
         local newHead, newTail
 
@@ -259,15 +270,7 @@ end
     @return any
 ]=]
 function Signal:wait()
-	local thread = coroutine.running()
-	local connection
-    
-    connection = self:connect(function(...)
-		connection:disconnect()
-		task.spawn(thread, ...)
-	end)
-
-	return coroutine.yield()
+    return select(2, self:promise():await())
 end
 
 --[=[
@@ -276,8 +279,22 @@ end
     @return Promise
 ]=]
 function Signal:promise()
-    return Promise.try(function()
-        return self:wait()
+    return Promise.new(function(resolve, reject, onCancel)
+        if self.queueing and self._queue[1] then
+            resolve(table.unpack(table.remove(self._queue, 1)))
+            return
+        end
+
+        local connection
+
+        onCancel(function()
+            connection:disconnect()
+        end)
+
+        connection = self:connect(function(...)
+            connection:disconnect()
+            resolve(...)
+        end)
     end)
 end
 
@@ -296,34 +313,11 @@ function Signal:connect(fn)
 
     if not head then
         self:_tryActivatedCall()
-
-        if self.queueing then
-            for _, args in pairs(self._queue) do
-                fn(table.unpack(args))
-            end
-
-            self:flush()
+        
+        while self.queueing and self._queue[1] and self._head do
+            fireImmediate(fn, table.unpack(table.remove(self._queue, 1)))
         end
     end
-
-    return connection
-end
-
---[=[
-    Connects a handler function to the signal so that it can be called when it's fired only once
-
-    @param fn function
-    @return Connection
-]=]
-function Signal:once(fn)
-    local connection
-    
-    connection = self:connect(function(...)
-        if connection.connected then
-            connection:disconnect()
-            fn(...)
-        end
-    end)
 
     return connection
 end
@@ -336,12 +330,10 @@ end
 function Signal:disconnectAll()
     local onDeactivated = self._onDeactivated
     local head = self._head
-    local node = head
 
-    while node do
+    eachNode(head, function(node)
         node.connected = false
-        node = node._next
-    end
+    end)
 
     if head and onDeactivated then
         onDeactivated()
