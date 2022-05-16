@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="generator" content="Docusaurus v2.0.0-beta.9">
 <title data-react-helmet="true">Store | Slick</title><meta data-react-helmet="true" property="og:title" content="Store | Slick"><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" name="description" content="Store class that holds many values that can be changed by a set of reducers"><meta data-react-helmet="true" property="og:description" content="Store class that holds many values that can be changed by a set of reducers"><meta data-react-helmet="true" property="og:url" content="https://revvy02.github.io/Slick/api/Store"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_tag" content="default"><link data-react-helmet="true" rel="canonical" href="https://revvy02.github.io/Slick/api/Store"><link data-react-helmet="true" rel="alternate" href="https://revvy02.github.io/Slick/api/Store" hreflang="en"><link data-react-helmet="true" rel="alternate" href="https://revvy02.github.io/Slick/api/Store" hreflang="x-default"><link rel="stylesheet" href="/Slick/assets/css/styles.06f234af.css">
-<link rel="preload" href="/Slick/assets/js/runtime~main.4d2e8495.js" as="script">
-<link rel="preload" href="/Slick/assets/js/main.704aaf22.js" as="script">
+<link rel="preload" href="/Slick/assets/js/runtime~main.e7fa130a.js" as="script">
+<link rel="preload" href="/Slick/assets/js/main.3465ba36.js" as="script">
 </head>
 <body>
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -14,31 +14,31 @@
 <p>Store class that holds many values that can be changed by a set of reducers</p>
 </div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="new"><code style="text-decoration:none">new</code><a aria-hidden="true" class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L114"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->.</code><code class="green_3LnD">new</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Creates a new Store object</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="is"><code style="text-decoration:none">is</code><a aria-hidden="true" class="hash-link" href="#is" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L139"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->.</code><code class="green_3LnD">is</code><code>(</code><code>obj<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy">bool</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="is"><code style="text-decoration:none">is</code><a aria-hidden="true" class="hash-link" href="#is" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L140"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->.</code><code class="green_3LnD">is</code><code>(</code><code>obj<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy">bool</code></div><div>
 <p>Returns whether or not the passed argument is a store object</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="setDepth"><code style="text-decoration:none">setDepth</code><a aria-hidden="true" class="hash-link" href="#setDepth" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L148"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">setDepth</code><code>(</code><code>depth<!-- -->: </code><code class="blue_2Afy">number</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="setDepth"><code style="text-decoration:none">setDepth</code><a aria-hidden="true" class="hash-link" href="#setDepth" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L149"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">setDepth</code><code>(</code><code>depth<!-- -->: </code><code class="blue_2Afy">number</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Sets how much history is tracked and removes any excess if the history size exceeds the depth</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getDepth"><code style="text-decoration:none">getDepth</code><a aria-hidden="true" class="hash-link" href="#getDepth" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L160"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">getDepth</code><code>(</code><code>) → </code><code class="blue_2Afy">number</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getDepth"><code style="text-decoration:none">getDepth</code><a aria-hidden="true" class="hash-link" href="#getDepth" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L161"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">getDepth</code><code>(</code><code>) → </code><code class="blue_2Afy">number</code></div><div>
 <p>Gets the depth of the store</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getHistory"><code style="text-decoration:none">getHistory</code><a aria-hidden="true" class="hash-link" href="#getHistory" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L169"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">getHistory</code><code>(</code><code>) → </code><code class="blue_2Afy">table</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getHistory"><code style="text-decoration:none">getHistory</code><a aria-hidden="true" class="hash-link" href="#getHistory" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L170"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">getHistory</code><code>(</code><code>) → </code><code class="blue_2Afy">table</code></div><div>
 <p>Gets the history of the store as a table</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="rawset"><code style="text-decoration:none">rawset</code><a aria-hidden="true" class="hash-link" href="#rawset" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L179"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">rawset</code><code>(</code><div class="inset_2cJr"><div><code>key<!-- -->: </code><code class="blue_2Afy">any</code><code>,</code></div><div><code>value<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="rawset"><code style="text-decoration:none">rawset</code><a aria-hidden="true" class="hash-link" href="#rawset" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L180"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">rawset</code><code>(</code><div class="inset_2cJr"><div><code>key<!-- -->: </code><code class="blue_2Afy">any</code><code>,</code></div><div><code>value<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Sets the state key to the value without firing any events (should be used to initialize the store)</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="rawsetState"><code style="text-decoration:none">rawsetState</code><a aria-hidden="true" class="hash-link" href="#rawsetState" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L188"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">rawsetState</code><code>(</code><code>state<!-- -->: </code><code class="blue_2Afy">table</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="rawsetState"><code style="text-decoration:none">rawsetState</code><a aria-hidden="true" class="hash-link" href="#rawsetState" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L189"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">rawsetState</code><code>(</code><code>state<!-- -->: </code><code class="blue_2Afy">table</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Sets the state of the store without firing any events (should be used to initialize the store)</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="setReducers"><code style="text-decoration:none">setReducers</code><a aria-hidden="true" class="hash-link" href="#setReducers" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L198"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">setReducers</code><code>(</code><code>reducers<!-- -->: </code><code class="blue_2Afy">table</code><code>) → </code><code class="blue_2Afy">nil</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="setReducers"><code style="text-decoration:none">setReducers</code><a aria-hidden="true" class="hash-link" href="#setReducers" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L199"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">setReducers</code><code>(</code><code>reducers<!-- -->: </code><code class="blue_2Afy">table</code><code>) → </code><code class="blue_2Afy">nil</code></div><div>
 <p>Sets the reducers for the store</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="get"><code style="text-decoration:none">get</code><a aria-hidden="true" class="hash-link" href="#get" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L207"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">get</code><code>(</code><code>key<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="get"><code style="text-decoration:none">get</code><a aria-hidden="true" class="hash-link" href="#get" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L208"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">get</code><code>(</code><code>key<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Gets the value of the key in the store</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getState"><code style="text-decoration:none">getState</code><a aria-hidden="true" class="hash-link" href="#getState" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L216"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">getState</code><code>(</code><code>) → </code><code class="blue_2Afy">table</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getState"><code style="text-decoration:none">getState</code><a aria-hidden="true" class="hash-link" href="#getState" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L217"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">getState</code><code>(</code><code>) → </code><code class="blue_2Afy">table</code></div><div>
 <p>Returns the state of the store</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="dispatch"><code style="text-decoration:none">dispatch</code><a aria-hidden="true" class="hash-link" href="#dispatch" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L227"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">dispatch</code><code>(</code><div class="inset_2cJr"><div><code>key<!-- -->: </code><code class="blue_2Afy">any</code><code>,</code></div><div><code>reducer<!-- -->: </code><code class="blue_2Afy">string</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="dispatch"><code style="text-decoration:none">dispatch</code><a aria-hidden="true" class="hash-link" href="#dispatch" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L228"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">dispatch</code><code>(</code><div class="inset_2cJr"><div><code>key<!-- -->: </code><code class="blue_2Afy">any</code><code>,</code></div><div><code>reducer<!-- -->: </code><code class="blue_2Afy">string</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Dispatches args to the reducer for a key</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getReducedSignal"><code style="text-decoration:none">getReducedSignal</code><a aria-hidden="true" class="hash-link" href="#getReducedSignal" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L268"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">getReducedSignal</code><code>(</code><div class="inset_2cJr"><div><code>key<!-- -->: </code><code class="blue_2Afy">any</code><code>,</code></div><div><code>reducer<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Slick/api/Signal">Signal</a></code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getReducedSignal"><code style="text-decoration:none">getReducedSignal</code><a aria-hidden="true" class="hash-link" href="#getReducedSignal" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L271"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">getReducedSignal</code><code>(</code><div class="inset_2cJr"><div><code>key<!-- -->: </code><code class="blue_2Afy">any</code><code>,</code></div><div><code>reducer<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Slick/api/Signal">Signal</a></code></div><div>
 <p>Returns a reduced signal that will be fired if that reducer is used on the key</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getChangedSignal"><code style="text-decoration:none">getChangedSignal</code><a aria-hidden="true" class="hash-link" href="#getChangedSignal" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L278"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">getChangedSignal</code><code>(</code><code>key<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Slick/api/Signal">Signal</a></code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getChangedSignal"><code style="text-decoration:none">getChangedSignal</code><a aria-hidden="true" class="hash-link" href="#getChangedSignal" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L281"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">getChangedSignal</code><code>(</code><code>key<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Slick/api/Signal">Signal</a></code></div><div>
 <p>Returns a signal that will be fired if the passed key value is changed</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="destroy"><code style="text-decoration:none">destroy</code><a aria-hidden="true" class="hash-link" href="#destroy" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L286"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="destroy"><code style="text-decoration:none">destroy</code><a aria-hidden="true" class="hash-link" href="#destroy" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/revvy02/Slick/blob/main/src/Store.lua#L289"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Store<!-- -->:</code><code class="green_3LnD">destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Cleans up the store object and sets destroyed field to true</p>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
@@ -157,7 +157,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 139,
+                &quot;line&quot;: 140,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -174,7 +174,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 148,
+                &quot;line&quot;: 149,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -190,7 +190,7 @@
             ],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 160,
+                &quot;line&quot;: 161,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -206,7 +206,7 @@
             ],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 169,
+                &quot;line&quot;: 170,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -228,7 +228,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 179,
+                &quot;line&quot;: 180,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -245,7 +245,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 188,
+                &quot;line&quot;: 189,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -267,7 +267,7 @@
             ],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 198,
+                &quot;line&quot;: 199,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -284,7 +284,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 207,
+                &quot;line&quot;: 208,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -300,7 +300,7 @@
             ],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 216,
+                &quot;line&quot;: 217,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -327,7 +327,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 227,
+                &quot;line&quot;: 228,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -354,7 +354,7 @@
             ],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 268,
+                &quot;line&quot;: 271,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -376,7 +376,7 @@
             ],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 278,
+                &quot;line&quot;: 281,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         },
@@ -387,7 +387,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 286,
+                &quot;line&quot;: 289,
                 &quot;path&quot;: &quot;src/Store.lua&quot;
             }
         }
@@ -401,7 +401,7 @@
         &quot;path&quot;: &quot;src/Store.lua&quot;
     }
 }</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#destroy" class="table-of-contents__link toc-highlight">:destroy</a></li><li><a href="#dispatch" class="table-of-contents__link toc-highlight">:dispatch</a></li><li><a href="#get" class="table-of-contents__link toc-highlight">:get</a></li><li><a href="#getChangedSignal" class="table-of-contents__link toc-highlight">:getChangedSignal</a></li><li><a href="#getDepth" class="table-of-contents__link toc-highlight">:getDepth</a></li><li><a href="#getHistory" class="table-of-contents__link toc-highlight">:getHistory</a></li><li><a href="#getReducedSignal" class="table-of-contents__link toc-highlight">:getReducedSignal</a></li><li><a href="#getState" class="table-of-contents__link toc-highlight">:getState</a></li><li><a href="#rawset" class="table-of-contents__link toc-highlight">:rawset</a></li><li><a href="#rawsetState" class="table-of-contents__link toc-highlight">:rawsetState</a></li><li><a href="#setDepth" class="table-of-contents__link toc-highlight">:setDepth</a></li><li><a href="#setReducers" class="table-of-contents__link toc-highlight">:setReducers</a></li><li><a href="#is" class="table-of-contents__link toc-highlight">.is</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 revvy02. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
-<script src="/Slick/assets/js/runtime~main.4d2e8495.js"></script>
-<script src="/Slick/assets/js/main.704aaf22.js"></script>
+<script src="/Slick/assets/js/runtime~main.e7fa130a.js"></script>
+<script src="/Slick/assets/js/main.3465ba36.js"></script>
 </body>
 </html>
