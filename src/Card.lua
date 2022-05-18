@@ -21,7 +21,6 @@ Card.__index = Card
 
     @private
     @param oldValue any
-    @return nil
 ]=]
 function Card:_tryHistory(oldValue)
     if self:getDepth() > 0 then
@@ -76,8 +75,7 @@ end
     Creates a new Card object
 
     @param initial any
-    @function new
-    @within Card
+    @return Card
 ]=]
 function Card.new(initial)
     local self = setmetatable({}, Card)
@@ -153,7 +151,6 @@ end
     Sets the reducers for the key (should typically only be set once when the Key is instantiated)
 
     @param reducers table
-    @return nil
 ]=]
 function Card:setReducers(reducers)
     self._reducers = reducers
@@ -163,7 +160,6 @@ end
     Sets the value without triggering any signals or history updates
 
     @param value any
-    @return nil
 ]=]
 function Card:rawset(value)
     self._value = value
@@ -183,7 +179,6 @@ end
 
     @param reducer string
     @param ... any
-    @return nil
 ]=]
 function Card:dispatch(reducer, ...)
     local reduce = self._reducers[reducer]

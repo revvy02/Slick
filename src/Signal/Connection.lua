@@ -9,13 +9,12 @@ Connection.__index = Connection
 --[=[
     Constructs a new connection object
 
-    @function new
-    @within Connection
     @param signal Signal
     @param fn function
+    @return Connection
     @private
 ]=]
-function Connection.new(signal, fn)
+function Connection._new(signal, fn)
 
     return setmetatable({
         _fn = fn,

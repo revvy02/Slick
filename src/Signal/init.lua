@@ -99,8 +99,6 @@ end
 --[=[
     Constructs a new signal object.
 
-    @function new
-    @within Signal
     @return Signal
 ]=]
 function Signal.new()
@@ -149,8 +147,6 @@ end
 
 --[=[
     Enables argumenting queuing from fire calls when there are no connections and sets queueing to true
-
-    @return nil
 ]=]
 function Signal:enableQueueing()
     if not self.queueing then
@@ -161,8 +157,6 @@ end
 
 --[=[
     Disables argumenting queuing from fire calls when there are no connections and sets queueing to false
-
-    @return nil
 ]=]
 function Signal:disableQueueing()
     if self.queueing then
@@ -173,8 +167,6 @@ end
 
 --[=[
     Enables deferred signaling and sets deferred to true
-
-    @return nil
 ]=]
 function Signal:enableDeferred()
     if not self.deferred then
@@ -184,8 +176,6 @@ end
 
 --[=[
     Disables deferred signaling and sets deferred to false
-
-    @return nil
 ]=]
 function Signal:disableDeferred()
     if self.deferred then
@@ -197,7 +187,6 @@ end
     Sets the callback that is called when a connection is made from when there are no connections (an activated state enters).
 
     @param fn function
-    @return nil
 ]=]
 function Signal:setActivatedCallback(fn)
     self._onActivated = fn
@@ -207,7 +196,6 @@ end
     Sets the callback that is called when the last active connection is disconnected (a deactivated state enters).
 
     @param fn function
-    @return nil
 ]=]
 function Signal:setDeactivatedCallback(fn)
     self._onDeactivated = fn
@@ -217,7 +205,6 @@ end
     Fires the signal with the optional passed arguments. This method makes optimizations by recycling threads in cases where connections don't yield if deferred is false.
 
     @param ... any
-    @return nil
 ]=]
 function Signal:fire(...)
     local head = self._head
@@ -254,8 +241,6 @@ end
 
 --[=[
     Empties any queued arguments that may have been added when fire was called with no connections.
-
-    @return nil
 ]=]
 function Signal:flush()
     if self.queueing then
@@ -274,7 +259,7 @@ function Signal:wait()
 end
 
 --[=[
-    Wraps a wait call in a promise. This is preferred over calling wait directly.
+    Returns a promise that resolves the next time the signal is fired
 
     @return Promise
 ]=]
@@ -305,7 +290,7 @@ end
     @return Connection
 ]=]
 function Signal:connect(fn)
-    local connection = Connection.new(self, fn)
+    local connection = Connection._new(self, fn)
     local head = self._head
 
     connection._next = head
@@ -324,8 +309,6 @@ end
 
 --[=[
     Disconnects all connections
-
-    @return nil
 ]=]
 function Signal:disconnectAll()
     local onDeactivated = self._onDeactivated
@@ -344,8 +327,6 @@ end
 
 --[=[
     Disconnects all connections and sets the "destroyed" field to true
-
-    @return nil
 ]=]
 function Signal:destroy()
     assert(not self.destroying and not self.destroyed, "Signal is already destroyed")

@@ -23,7 +23,6 @@ Store.__index = Store
 
     @private
     @param oldState table
-    @return nil
 ]=]
 function Store:_tryHistory(oldState)
     if self:getDepth() > 0 then
@@ -108,8 +107,8 @@ end
 --[=[
     Creates a new Store object
 
-    @function new
-    @within Store
+    @param initial? table
+    @return Store
 ]=]
 function Store.new(initial)
     local self = setmetatable({}, Store)
@@ -194,7 +193,6 @@ end
     Sets the reducers for the store
 
     @param reducers table
-    @return nil
 ]=]
 function Store:setReducers(reducers)
     self._reducers = reducers

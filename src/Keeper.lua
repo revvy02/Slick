@@ -15,8 +15,7 @@ Keeper.__index = Keeper
 --[=[
     Creates a new Keeper object
 
-    @function new
-    @within Keeper
+    @return Keeper
 ]=]
 function Keeper.new()
     local self = setmetatable({}, Keeper)
@@ -54,7 +53,7 @@ end
     Creates the card and fires keyAdded or throws if it exists
 
     @param key any
-    @param value? any
+    @param value any
     @return Card
 ]=]
 function Keeper:addCard(key, value)
@@ -92,8 +91,6 @@ end
 
 --[=[
     Destroys the keeper and sets destroyed field to true (preps for garbage collection)
-
-    @return nil
 ]=]
 function Keeper:destroy()
     assert(not self.destroying and not self.destroyed, "Keeper already destroyed")

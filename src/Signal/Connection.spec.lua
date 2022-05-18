@@ -6,32 +6,10 @@ return function()
 
     end
 
-    describe("Connection.new", function()
-        it("should create a new connection object", function()
-            local signal = Signal.new()
-            local connection = Connection.new(signal, noop)
-
-            expect(connection).to.be.ok()
-            expect(connection.is(connection)).to.equal(true)
-            
-            signal:destroy()
-        end)
-
-        it("should be initially connected", function()
-            local signal = Signal.new()
-            local connection = Connection.new(signal, noop)
-
-            expect(connection).to.be.ok()
-            expect(connection.connected).to.equal(true)
-            
-            signal:destroy()
-        end)
-    end)
-
     describe("Connection.is", function()
         it("should return true if passed object is a Connection", function()
             local signal = Signal.new()
-            local connection = Connection.new(signal, noop)
+            local connection = signal:connect(noop)
 
             expect(connection.is(connection)).to.equal(true)
             
@@ -40,7 +18,7 @@ return function()
 
         it("should return false if passed object is not a connection", function()
             local signal = Signal.new()
-            local connection = Connection.new(signal, noop)
+            local connection = signal:connect(noop)
 
             expect(connection.is({})).to.equal(false)
             expect(connection.is(noop)).to.equal(false)
@@ -53,7 +31,7 @@ return function()
     describe("Connection:disconnect", function()
         it("should set connected field to false", function()
             local signal = Signal.new()
-            local connection = Connection.new(signal, noop)
+            local connection = signal:connect(noop)
 
             expect(connection.connected).to.equal(true)
 
@@ -96,7 +74,7 @@ return function()
     describe("Connection:destroy", function()
         it("should disconnect the connection", function()
             local signal = Signal.new()
-            local connection = Connection.new(signal, noop)
+            local connection = signal:connect(noop)
 
             expect(connection.connected).to.equal(true)
 
@@ -109,7 +87,7 @@ return function()
 
         it("should set destroyed field to true", function()
             local signal = Signal.new()
-            local connection = Connection.new(signal, noop)
+            local connection = signal:connect(noop)
 
             expect(connection.destroyed).to.equal(nil)
 
