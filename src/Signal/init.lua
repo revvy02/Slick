@@ -236,7 +236,7 @@ function Signal:fire(...)
         eachNode(head, function(node)
             if node.connected then
                 if not newHead then
-                    head = node
+                    newHead = node
                     newTail = node
                 else
                     newTail._next = node

@@ -109,6 +109,25 @@ return function()
     end)
     
     describe("Signal:fire", function()
+        it("should fire connections with future passed args", function()
+            local signal = Signal.new()
+            local done = {}
+
+            signal:connect(function(value)
+                done[value] = true
+            end)
+
+            signal:fire(1)
+            signal:fire(2)
+            signal:fire(3)
+
+            expect(done[1]).to.equal(true)
+            expect(done[2]).to.equal(true)
+            expect(done[3]).to.equal(true)
+
+            signal:destroy()
+        end)
+
         it("should queue passed args and fire the first connection made with all of them if queueing enabled", function()
             local signal = Signal.new()
             signal:enableQueueing()
