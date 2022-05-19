@@ -286,16 +286,5 @@ return function()
 
             expect(store.destroyed).to.equal(true)
         end)
-
-        it("should throw if already destroyed", function()
-            local store = Store.new()
-
-            store:destroy()
-
-            expect(function()
-                store:destroy()
-            end).to.throw()
-        end)
-
     end)
 end

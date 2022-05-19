@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[794],{97868:function(e){e.exports=JSON.parse('{"sourceUrl":"https://github.com/revvy02/Cleaner/blob/main","baseUrl":"/Cleaner/","classOrder":[],"apiCategories":[]}')}}]);

@@ -424,14 +424,12 @@ return function()
             expect(count).to.equal(10)
         end)
 
-        it("should fail if already been destroyed", function()
+        it("should set destroyed field to true", function()
             local cleaner = Cleaner.new()
-            
+
             cleaner:destroy()
 
-            expect(function()
-                cleaner:destroy()
-            end).to.throw()
+            expect(cleaner.destroyed).to.equal(true)
         end)
     end)
 

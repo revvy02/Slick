@@ -326,15 +326,10 @@ function Signal:disconnectAll()
 end
 
 --[=[
-    Disconnects all connections and sets the "destroyed" field to true
+    Alias for disconnectAll but sets destroyed field to true
 ]=]
 function Signal:destroy()
-    assert(not self.destroying and not self.destroyed, "Signal is already destroyed")
-
-    self.destroying = true
     self:disconnectAll()
-    self.destroying = false
-
     self.destroyed = true
 end
 

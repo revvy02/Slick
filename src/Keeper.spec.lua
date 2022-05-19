@@ -120,16 +120,6 @@ return function()
     end)
 
     describe("Keeper:destroy", function()
-        it("should throw if already destroyed", function()
-            local keeper = Keeper.new()
-
-            keeper:destroy()
-
-            expect(function()
-                keeper:destroy()
-            end).to.throw()
-        end)
-
         it("should destroy all cards", function()
             local keeper = Keeper.new()
 

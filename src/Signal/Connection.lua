@@ -75,15 +75,10 @@ function Connection:disconnect()
 end
 
 --[=[
-    Disconnects the connection and sets the destroyed field to true
+    Alias for disconnect but sets destroyed field to true
 ]=]
 function Connection:destroy()
-    assert(not self.destroying and not self.destroyed, "Connection is already destroyed")
-
-    self.destroying = true
     self:disconnect()
-    self.destroying = false
-
     self.destroyed = true
 end
 

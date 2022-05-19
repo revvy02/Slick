@@ -1,8 +1,4 @@
 local WEAK_MT = {__mode = "v"}
-local ALREADY_DESTROYED_ERROR = "Store already destroyed"
-local KEY_RESERVED_ERROR = "\"%s\" is reserved and can't be used for remaps"
-local NO_REDUCERS_FOUND_ERROR = "No reducers found for \"%s\""
-local INVALID_REDUCER_ERROR = "\"%s\" is not a valid reducer for \"%s\""
 
 local Cleaner = require(script.Parent.Parent.Cleaner)
 
@@ -285,10 +281,6 @@ end
     @within Store
 ]=]
 function Store:destroy()
-    assert(not self.destroyed and not self.destroying, ALREADY_DESTROYED_ERROR)
-
-    self.destroying = true
-
     for _, signal in pairs(self._changedSignals) do
         signal:destroy()
     end
@@ -300,8 +292,6 @@ function Store:destroy()
     end
 
     self._cleaner:destroy()
-
-    self.destroying = false
     self.destroyed = true
 end
 

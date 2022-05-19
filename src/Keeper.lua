@@ -90,14 +90,10 @@ function Keeper:removeCard(key)
 end
 
 --[=[
-    Destroys the keeper and sets destroyed field to true (preps for garbage collection)
+    Prepares keeper for garbage collection
 ]=]
 function Keeper:destroy()
-    assert(not self.destroying and not self.destroyed, "Keeper already destroyed")
-
-    self.destroying = true
     self._cleaner:destroy()
-    self.destroying = false
     self.destroyed = true
 end
 

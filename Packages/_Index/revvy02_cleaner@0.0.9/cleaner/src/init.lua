@@ -1,7 +1,6 @@
 local NO_FINALIZER_ERROR = "No finalizer found for %s (typeof: %s)"
 local DUPLICATE_TASK_ERROR = "Attempted to add duplicate %s (typeof: %s)"
 local ALREADY_WORKING_ERROR = "Attempted to call work when already working"
-local ALREADY_DESTROYING_ERROR = "Attempted to call destroy when already destroying or destroyed"
 local INVALID_TASK_KEY_ERROR = "Key (%s) is not assigned to any task"
 
 local DEFAULT_FINALIZERS = {
@@ -56,14 +55,6 @@ local Cleaner = {}
 Cleaner.__index = Cleaner
 
 --[=[
-    Will be set to true if the cleaner object is currently doing work
-
-    @prop working boolean
-    @readonly
-    @within Cleaner
-]=]
-
---[=[
     Creates a new cleaner object
 
     @function new
@@ -71,7 +62,15 @@ Cleaner.__index = Cleaner
 ]=]
 function Cleaner.new()
     return setmetatable({
+        --[=[
+            Will be set to true if the cleaner object is currently doing work
+
+            @prop working boolean
+            @readonly
+            @within Cleaner
+        ]=]
         working = false,
+
         [ArgMap] = {},
         [KeyMap] = {},
         [TaskMap] = {},
@@ -184,7 +183,7 @@ end
     This can yield if the finalizer yields.
 
     @param key Key
-    @param ...? any -- Optional arguments that can be used to overwrite any that were included in the set call
+    @param ... any -- Optional arguments that can be used to overwrite any that were included in the set call
     @return Task
 
     @yields
@@ -250,18 +249,12 @@ function Cleaner:work()
 end
 
 --[=[
-    Cleans up the cleaner object by calling work and setting the destroyed field to true. This can yield if any finalizers yield.
+    Alias for work but sets destroyed field to true
 
     @yields
-    @error "Attempted to call destroy when already destroying or destroyed"
 ]=]
 function Cleaner:destroy()
-    assert(not self.destroying and not self.destroyed, ALREADY_DESTROYING_ERROR)
-
-    self.destroying = true
     self:work()
-    self.destroying = nil
-
     self.destroyed = true
 end
 

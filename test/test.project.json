@@ -5,13 +5,13 @@
         
       "ReplicatedStorage": {
         "Packages": {
-          "$path": "Packages"
+          "$path": "../Packages"
         }
       },
 
       "ServerScriptService": {
         "Slick": {
-          "$path": "src"
+          "$path": "../src"
         }
       }
     }

@@ -1,6 +1,4 @@
-local ALREADY_DESTROYED_ERROR = "Card already destroyed or destroying"
-local INVALID_REDUCER_ERROR = "\"%s\" is not a valid reducer"
-local WEAK_MT = {__mode == "v"}
+local WEAK_MT = {__mode = "v"}
 
 local Signal = require(script.Parent.Signal)
 local Reducer = require(script.Parent.Reducer)
@@ -205,18 +203,13 @@ function Card:dispatch(reducer, ...)
 end
 
 --[=[
-    Destroys the card by prepping for garbage collection
+    Prepares card for garbage collection
 ]=]
 function Card:destroy()
-    assert(not self.destroying and not self.destroyed, "Card already destroyed or destroying")
-
-    self.destroying = true
-
     for _, signal in pairs(self._signals) do
         signal:destroy()
     end
 
-    self.destroying = false
     self.destroyed = true
 end
 

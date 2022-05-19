@@ -572,20 +572,41 @@ return function()
     end)
 
     describe("Signal:destroy", function()
-        it("should disconnect all connected connections and set destroyed field to true", function()
+        it("should set destroyed field to true", function()
+            local signal = Signal.new()
+
+            signal:destroy()
+
+            expect(signal.destroyed).to.equal(true)
+        end)
+
+        it("should disconnect all connected connections", function()
             local signal = Signal.new()
             local connection0 = signal:connect(noop)
             local connection1 = signal:connect(noop)
 
             expect(connection0.connected).to.equal(true)
             expect(connection1.connected).to.equal(true)
-            expect(signal.destroyed).to.equal(nil)
-            
+
             signal:destroy()
 
             expect(connection0.connected).to.equal(false)
             expect(connection1.connected).to.equal(false)
-            expect(signal.destroyed).to.equal(true)
+        end)
+
+        it("should call a onDeactivated callback if it's set", function()
+            local signal = Signal.new()
+            local value = 0
+
+            signal:setDeactivatedCallback(function()
+                value += 1
+            end)
+
+            signal:connect(noop)
+            expect(value).to.equal(0)
+
+            signal:destroy()
+            expect(value).to.equal(1)
         end)
     end)
 end

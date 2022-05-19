@@ -227,17 +227,6 @@ return function()
 
             expect(card.destroyed).to.equal(true)
         end)
-
-        it("should throw if already destroyed", function()
-            local card = Card.new()
-
-            card:destroy()
-
-            expect(function()
-                card:destroy()
-            end).to.throw()
-        end)
-
     end)
 
 end
