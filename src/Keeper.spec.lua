@@ -1,7 +1,8 @@
 local RunService = game:GetService("RunService")
-return function()
-    local Keeper = require(script.Parent.Keeper)
 
+local Keeper = require(script.Parent.Keeper)
+
+return function()
     describe("Keeper.new", function()
         it("should create a new keeper", function()
             local keeper = Keeper.new()

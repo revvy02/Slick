@@ -22,9 +22,9 @@ function Keeper.new()
 
     self._cleaner = Cleaner.new()
 
-    self.added = self._cleaner:add(Signal.new())
-    self.removed = self._cleaner:add(Signal.new())
-    self.changed = self._cleaner:add(Signal.new())
+    self.added = self._cleaner:give(Signal.new())
+    self.removed = self._cleaner:give(Signal.new())
+    self.changed = self._cleaner:give(Signal.new())
 
     return self
 end
