@@ -14,7 +14,7 @@ dependencies = [["TestEZ", "roblox/testez@0.4.1"]]
 
 [[package]]
 name = "revvy02/slick"
-version = "0.0.7"
+version = "0.0.8"
 dependencies = [["Cleaner", "revvy02/cleaner@0.0.11"], ["Promise", "evaera/promise@4.0.0"], ["TestEZ", "roblox/testez@0.4.1"]]
 
 [[package]]
