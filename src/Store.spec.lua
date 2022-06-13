@@ -251,7 +251,7 @@ return function()
 
     end)
 
-    describe("Store:rawset", function()
+    describe("Store:rawsetValue", function()
         it("should set the key value without firing signals", function()
             local store = Store.new()
             local done = false
@@ -268,9 +268,35 @@ return function()
                 done = true
             end)
 
-            store:rawset("a", 1)
+            store:rawsetValue("a", 1)
 
             expect(store:getValue("a")).to.equal(1)
+            expect(done).to.equal(false)
+
+            store:destroy()
+        end)
+    end)
+
+    describe("Store:rawsetState", function()
+        it("should set the store state without firing signals", function()
+            local store = Store.new()
+            local done = false
+
+            store.changed:connect(function()
+                done = true
+            end)
+
+            store.reduced:connect(function()
+                done = true
+            end)
+
+            store:rawsetState({
+                a = 0,
+                b = 1,
+            })
+
+            expect(store:getValue("a")).to.equal(0)
+            expect(store:getValue("b")).to.equal(1)
             expect(done).to.equal(false)
 
             store:destroy()

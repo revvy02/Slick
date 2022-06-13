@@ -162,7 +162,7 @@ end
     @param key any
     @param value any
 ]=]
-function Store:rawset(key, value)
+function Store:rawsetValue(key, value)
     self._state[key] = value
 end
 
