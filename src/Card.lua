@@ -1,6 +1,7 @@
 local WEAK_MT = {__mode = "v"}
 
-local Signal = require(script.Parent.Signal)
+local TrueSignal = require(script.Parent.Parent.TrueSignal)
+
 local Reducers = require(script.Parent.Reducers)
 local None = require(script.Parent.None)
 
@@ -62,7 +63,7 @@ function Card:_findSignal(key, generate)
     local signal = signals[key]
 
     if not signal and generate then
-        signal = Signal.new()
+        signal = TrueSignal.new()
         signals[key] = signal
     end
 
@@ -73,6 +74,7 @@ end
     Creates a new Card object
 
     @param initial any
+    @param reducers? table
     @return Card
 ]=]
 function Card.new(initial, reducers)
@@ -149,7 +151,7 @@ end
 
     @param value any
 ]=]
-function Card:rawset(value)
+function Card:rawsetValue(value)
     self._value = value
 end
 
@@ -177,7 +179,7 @@ function Card:dispatch(reducer, ...)
     local newValue = reduce(oldValue, ...)
 
     self:_tryHistory(oldValue)
-    self:rawset(newValue)
+    self:rawsetValue(newValue)
 
     local changedSignal = self:_findSignal(ChangedKey, false)
 

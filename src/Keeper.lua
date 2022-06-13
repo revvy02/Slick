@@ -1,8 +1,7 @@
 local Cleaner = require(script.Parent.Parent.Cleaner)
-local Promise = require(script.Parent.Parent.Promise)
+local TrueSignal = require(script.Parent.Parent.TrueSignal)
 
 local Card = require(script.Parent.Card)
-local Signal = require(script.Parent.Signal)
 
 --[=[
     Keeper class that tracks and holds card instances
@@ -22,9 +21,9 @@ function Keeper.new()
 
     self._cleaner = Cleaner.new()
 
-    self.created = self._cleaner:give(Signal.new())
-    self.removed = self._cleaner:give(Signal.new())
-    self.changed = self._cleaner:give(Signal.new())
+    self.created = self._cleaner:give(TrueSignal.new())
+    self.removed = self._cleaner:give(TrueSignal.new())
+    self.changed = self._cleaner:give(TrueSignal.new())
 
     return self
 end
@@ -44,6 +43,7 @@ end
 
     @param key any
     @param value any
+    @param reducers? table
     @return Card
 ]=]
 function Keeper:createCard(key, value, reducers)

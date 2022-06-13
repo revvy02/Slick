@@ -1,8 +1,7 @@
 local WEAK_MT = {__mode = "v"}
 
 local Cleaner = require(script.Parent.Parent.Cleaner)
-
-local Signal = require(script.Parent.Signal)
+local TrueSignal = require(script.Parent.Parent.TrueSignal)
 
 local Reducers = require(script.Parent.Reducers)
 
@@ -62,7 +61,7 @@ function Store:_findChangedSignal(key, generate)
     local changedSignal = changedSignals[key]
 
     if not changedSignal and generate then
-        changedSignal = Signal.new()
+        changedSignal = TrueSignal.new()
         changedSignals[key] = changedSignal
     end
 
@@ -93,7 +92,7 @@ function Store:_findReducedSignal(key, reducer, generate)
     local reducedSignal = keySignals[reducer]
 
     if not reducedSignal and generate then
-        reducedSignal = Signal.new()
+        reducedSignal = TrueSignal.new()
         keySignals[reducer] = reducedSignal
     end
 
@@ -104,6 +103,7 @@ end
     Creates a new Store object
 
     @param initial? table
+    @param reducers? table
     @return Store
 ]=]
 function Store.new(initial, reducers)
@@ -120,8 +120,8 @@ function Store.new(initial, reducers)
     self._reducedSignals = setmetatable({}, WEAK_MT)
     self._changedSignals = setmetatable({}, WEAK_MT)
 
-    self.changed = self._cleaner:give(Signal.new())
-    self.reduced = self._cleaner:give(Signal.new())
+    self.changed = self._cleaner:give(TrueSignal.new())
+    self.reduced = self._cleaner:give(TrueSignal.new())
     
     return self
 end

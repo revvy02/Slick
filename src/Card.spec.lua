@@ -1,7 +1,7 @@
 local RunService = game:GetService("RunService")
 
 local Card = require(script.Parent.Card)
-local Signal = require(script.Parent.Signal)
+local TrueSignal = require(script.Parent.Parent.TrueSignal)
 
 return function()
     describe("Card.new", function()
@@ -59,7 +59,7 @@ return function()
         it("should set the depth of the card and trim any excess history off if necessary", function()
             local card = Card.new()
             
-            card:rawset(0)
+            card:rawsetValue(0)
             card:setDepth(3)
 
             expect(card:getDepth()).to.equal(3)
@@ -124,7 +124,7 @@ return function()
             local signal = card:getReducedSignal("setValue")
 
             expect(signal).to.be.a("table")
-            expect(getmetatable(signal)).to.equal(Signal)
+            expect(getmetatable(signal)).to.equal(TrueSignal)
 
             card:destroy()
         end)
@@ -137,7 +137,7 @@ return function()
             local signal = card:getChangedSignal()
 
             expect(signal).to.be.a("table")
-            expect(getmetatable(signal)).to.equal(Signal)
+            expect(getmetatable(signal)).to.equal(TrueSignal)
             
             card:destroy()
         end)
@@ -171,7 +171,7 @@ return function()
                 new, old = ...
             end)
 
-            card:rawset(2)
+            card:rawsetValue(2)
             card:dispatch("setValue", 3)
 
             expect(card:getValue()).to.equal(3)
@@ -200,7 +200,7 @@ return function()
 
     end)
 
-    describe("Card:rawset", function()
+    describe("Card:rawsetValue", function()
         it("should set the value without firing any signals", function()
             local card = Card.new()
             local done = false
@@ -209,7 +209,7 @@ return function()
                 done = true
             end)
 
-            card:rawset(2)
+            card:rawsetValue(2)
             expect(card:getValue()).to.equal(2)
             expect(done).to.equal(false)
 

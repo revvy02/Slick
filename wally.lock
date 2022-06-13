@@ -15,7 +15,12 @@ dependencies = [["TestEZ", "roblox/testez@0.4.1"]]
 [[package]]
 name = "revvy02/slick"
 version = "0.0.10"
-dependencies = [["Cleaner", "revvy02/cleaner@1.0.0"], ["Promise", "evaera/promise@4.0.0"], ["TestEZ", "roblox/testez@0.4.1"]]
+dependencies = [["Cleaner", "revvy02/cleaner@1.0.0"], ["TestEZ", "roblox/testez@0.4.1"], ["TrueSignal", "revvy02/truesignal@1.0.1"]]
+
+[[package]]
+name = "revvy02/truesignal"
+version = "1.0.1"
+dependencies = [["Promise", "evaera/promise@4.0.0"], ["TestEZ", "roblox/testez@0.4.1"]]
 
 [[package]]
 name = "roblox/testez"

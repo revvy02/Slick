@@ -1,6 +1,4 @@
-local RunService = game:GetService("RunService")
-
-local Signal = require(script.Parent.Signal)
+local TrueSignal = require(script.Parent.Parent.TrueSignal)
 local Store = require(script.Parent.Store)
 
 return function()
@@ -144,7 +142,7 @@ return function()
             local signal = store:getReducedSignal("a", "setValue")
 
             expect(signal).to.be.a("table")
-            expect(getmetatable(signal)).to.equal(Signal)
+            expect(getmetatable(signal)).to.equal(TrueSignal)
 
             store:destroy()
         end)
@@ -158,7 +156,7 @@ return function()
             local signal = store:getChangedSignal("a")
 
             expect(signal).to.be.a("table")
-            expect(getmetatable(signal)).to.equal(Signal)
+            expect(getmetatable(signal)).to.equal(TrueSignal)
 
             store:destroy()
         end)
