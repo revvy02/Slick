@@ -5,6 +5,32 @@ local TrueSignal = require(script.Parent.Parent.TrueSignal)
 
 local Reducers = require(script.Parent.Reducers)
 
+local function freezeValue(value)
+    if typeof(value) == "table" and not table.isfrozen(value) then
+        table.freeze(value)
+    end
+end
+
+local function freezeState(state)
+    if not table.isfrozen(state) then
+        table.freeze(state)
+    end
+
+    for _, value in state do
+        freezeValue(value)
+    end
+end
+
+local function immutableSet(state, key, value)
+    local new = table.clone(state)
+
+    freezeValue(value)
+
+    new[key] = value
+
+    return new
+end
+
 --[=[
     Store class that holds many values that can be changed by a set of reducers
 
@@ -20,12 +46,20 @@ Store.__index = Store
     @param oldState table
 ]=]
 function Store:_tryHistory(oldState)
-    if self:getDepth() > 0 then
-        self._history = table.clone(self._history)
+    local depth = self:getDepth()
 
-        table.insert(self._history, 1, oldState)
+    if depth > 0 then
+        local history = table.clone(self._history)
+        
+        table.insert(history, 1, oldState)
+        
+        if #history > depth then
+            table.remove(history, #history)
+        end
 
-        self:_trimHistory()
+        table.freeze(history)
+
+        self._history = history
     end
 end
 
@@ -35,17 +69,19 @@ end
     @private
 ]=]
 function Store:_trimHistory()
+    local depth = self:getDepth()
     local history = self._history
-    local n, depth = #history, self._depth
+    local n = #history
 
     if depth < n then
-        local newHistory = table.clone(history)
+        local new = table.clone(history)
 
         for i = depth + 1, n do
-            newHistory[i] = nil
+            new[i] = nil
         end
 
-        self._history = newHistory
+        table.freeze(new)
+        self._history = new
     end
 end
 
@@ -76,7 +112,7 @@ end
     @param reducer string
     @param generate bool
 ]=]
-function Store:_findReducedSignal(key, reducer, generate)
+function Store:_findReducedSignal(reducer, key, generate)
     local reducedSignals = self._reducedSignals
     local keySignals = reducedSignals[key]
 
@@ -113,7 +149,8 @@ function Store.new(initial, reducers)
     self._history = {}
 
     self._state = initial or {}
-
+    freezeState(self._state)
+    
     self._cleaner = Cleaner.new()
     self._reducers = reducers or Reducers.Standard
 
@@ -163,7 +200,7 @@ end
     @param value any
 ]=]
 function Store:rawsetValue(key, value)
-    self._state[key] = value
+    self._state = immutableSet(self._state, key, value)
 end
 
 --[=[
@@ -172,6 +209,7 @@ end
     @param state table
 ]=]
 function Store:rawsetState(state)
+    freezeState(state)
     self._state = state
 end
 
@@ -209,7 +247,7 @@ end
     @param reducer string
     @param ... any
 ]=]
-function Store:dispatch(key, reducer, ...)
+function Store:dispatch(reducer, key, ...)
     local reduce = self._reducers[reducer]
 
     assert(reduce, string.format("\"%s\" is not a valid reducer for \"%s\"", reducer, key))
@@ -222,14 +260,13 @@ function Store:dispatch(key, reducer, ...)
         return
     end
 
-    local newState = table.clone(oldState)
-    newState[key] = newValue
-    
+    local newState = immutableSet(oldState, key, newValue)
+
     self._state = newState
     self:_tryHistory(oldState)
 
     self.changed:fire(key, newState, oldState)
-    self.reduced:fire(key, reducer, ...)
+    self.reduced:fire(reducer, key, ...)
 
     -- handle direct key change and reduced signals
     local changedSignal = self:_findChangedSignal(key, false)
@@ -238,7 +275,7 @@ function Store:dispatch(key, reducer, ...)
         changedSignal:fire(newValue, oldValue)
     end
    
-    local reducedSignal = self:_findReducedSignal(key, reducer, false)
+    local reducedSignal = self:_findReducedSignal(reducer, key, false)
        
     if reducedSignal then
         reducedSignal:fire(...)
@@ -250,17 +287,17 @@ end
 
     @param key any
     @param reducer any
-    @return Signal
+    @return TrueSignal
 ]=]
-function Store:getReducedSignal(key, reducer)
-    return self:_findReducedSignal(key, reducer, true)
+function Store:getReducedSignal(reducer, key)
+    return self:_findReducedSignal(reducer, key, true)
 end
 
 --[=[
     Returns a signal that will be fired if the passed key value is changed
     
     @param key any
-    @return Signal
+    @return TrueSignal
 ]=]
 function Store:getChangedSignal(key)
     return self:_findChangedSignal(key, true)
@@ -282,7 +319,6 @@ function Store:destroy()
     end
 
     self._cleaner:destroy()
-    self.destroyed = true
 end
 
 return Store
